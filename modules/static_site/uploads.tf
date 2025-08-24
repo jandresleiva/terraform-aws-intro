@@ -2,7 +2,7 @@
 resource "aws_s3_object" "index" {
   bucket       = aws_s3_bucket.site.id
   key          = "index.html"
-  source       = "${path.module}/index.html"   # file sits next to these .tf files
+  source       = "${path.module}/index.html"
   etag         = filemd5("${path.module}/index.html")
   content_type = "text/html; charset=utf-8"
 
