@@ -34,25 +34,32 @@ This project creates:
    aws configure
    ```
 
-3. **Initialize Terraform**
+3. **Set up variables**
+
+   ```bash
+   cp terraform.tfvars.example terraform.tfvars
+   # Edit terraform.tfvars with your unique bucket name
+   ```
+
+4. **Initialize Terraform**
 
    ```bash
    terraform init
    ```
 
-4. **Plan the deployment**
+5. **Plan the deployment**
 
    ```bash
    terraform plan
    ```
 
-5. **Apply the infrastructure**
+6. **Apply the infrastructure**
 
    ```bash
    terraform apply
    ```
 
-6. **Access your website**
+7. **Access your website**
    After deployment, Terraform will output the CloudFront distribution URL where your site is accessible.
 
 ## 📁 Project Structure
@@ -71,17 +78,17 @@ This project creates:
 │       ├── variables.tf # Module input variables
 │       ├── outputs.tf   # Module outputs
 │       └── locals.tf    # Local values and tags
-└── prod/
-    └── index.html       # Sample static website content
+└── index.html           # Sample static website content
 ```
 
 ## ⚙️ Configuration
 
 ### Variables
 
-| Variable     | Description                  | Type     | Default     |
-| ------------ | ---------------------------- | -------- | ----------- |
-| `aws_region` | AWS region for all resources | `string` | `us-east-1` |
+| Variable     | Description                  | Type     | Default     | Required |
+| ------------ | ---------------------------- | -------- | ----------- | -------- |
+| `aws_region` | AWS region for all resources | `string` | `us-east-1` | No       |
+| `bucket_name` | Globally unique S3 bucket name | `string` | None | **Yes** |
 
 ### Module Configuration
 
@@ -94,7 +101,7 @@ The `static_site` module accepts:
 
 ### Adding Your Own Content
 
-1. Replace the content in `prod/index.html` with your static website files
+1. Replace the content in `index.html` with your static website files
 2. Update the `index_file` path in `main.tf` if needed
 3. Run `terraform apply` to upload the new content
 
